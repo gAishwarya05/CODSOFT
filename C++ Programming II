@@ -1,0 +1,43 @@
+/*TASK 2
+Develop a calculator program that performs basic arithmetic
+operations such as addition, subtraction, multiplication, and
+division. Allow the user to input two numbers and choose an
+operation to perform.*/
+#include <iostream>
+using namespace std;
+int main(){
+int num;
+int n1,n2;
+int r;
+cout<<"Enter the two numbers:\n";
+cin>>n1>>n2;
+while(1){
+cout<<"Enter the operation:\n"<<"1.Addition\n"<<"2.Subtraction\n"<<"3.Multiplication\n"<<"4.Division\n";
+cin>>num;
+if(num<1||num>4){
+    cout<<"Invalid option.\n";
+}
+
+switch(num){
+    case 1:
+    r=n1+n2;
+    cout<<"The result is :"<<r<<endl;
+    break;
+    case 2:
+    r=n1-n2;
+    cout<<"The result is :"<<r<<endl;
+    break;
+    case 3:
+    r=n1*n2;
+    cout<<"The result is :"<<r<<endl;
+    break;
+    case 4:
+    r=n1/n2;
+    cout<<"The result is :"<<r<<endl;
+    break;
+    
+    
+}
+}
+}
+
