@@ -1,3 +1,40 @@
+/*TASK 1
+NUMBER GUESSING GAME
+Create a program that generates a random number and asks the
+user to guess it. Provide feedback on whether the guess is too
+high or too low until the user guesses the correct number.*/
+#include <iostream>
+using namespace std;
+int main() {
+    char playAgain;
+
+    do {
+        int number = (rand() % 100) + 1;
+        int guess;
+        int attempts = 0;
+
+        cout << "Guess the number between 1 and 100:\n";
+
+        do {
+            cin >> guess;
+            attempts++;
+
+            if (guess > number)
+                cout << "Too high.\n";
+            else if (guess < number)
+                cout << "Too low.\n";
+        } while (guess != number);
+
+        cout << "Correct! You guessed it in " << attempts << " tries.\n";
+        cout << "The number was: " << number << "\n";
+
+        cout << "Do you want to play again? (y/n): ";
+        cin >> playAgain;
+
+    } while (playAgain == 'y' || playAgain == 'Y');
+    cout << "Thanks for playing!\n";
+    return 0;
+}
 /*TASK 2
 Develop a calculator program that performs basic arithmetic
 operations such as addition, subtraction, multiplication, and
@@ -40,4 +77,94 @@ switch(num){
 }
 }
 }
+/*TASK 4
+TO-DO LIST
+Build a simple console-based to-do list manager that allows users to add, view, and delete tasks*/
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int MAX_TASKS = 100;
+    string tasks[MAX_TASKS];
+    bool completed[MAX_TASKS];
+    int taskCount = 0;
+    int choice;
+
+    do {
+        cout << "\nTo-Do List Manager\n";
+        cout << "1. Add Task\n";
+        cout << "2. View Tasks\n";
+        cout << "3. Mark Task as Completed\n";
+        cout << "4. Remove Task\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore(); // Clear newline
+
+        if (choice == 1) {
+            if (taskCount >= MAX_TASKS) {
+                cout << "Task list is full!\n";
+            } else {
+                cout << "Enter task description: ";
+                getline(cin, tasks[taskCount]);
+                completed[taskCount] = false;
+                taskCount++;
+                cout << "Task added.\n";
+            }
+        }
+        else if (choice == 2) {
+            if (taskCount == 0) {
+                cout << "No tasks.\n";
+            } else {
+                for (int i = 0; i < taskCount; i++) {
+                    cout << i + 1 << ". [" << (completed[i] ? "Completed" : "Pending") << "] " << tasks[i] << endl;
+                }
+            }
+        }
+        else if (choice == 3) {
+            if (taskCount == 0) {
+                cout << "No tasks.\n";
+            } else {
+                int n;
+                cout << "Enter task number to mark as completed: ";
+                cin >> n;
+                if (n < 1 || n > taskCount) {
+                    cout << "Invalid task number.\n";
+                } else {
+                    completed[n - 1] = true;
+                    cout << "Task marked as completed.\n";
+                }
+            }
+        }
+        else if (choice == 4) {
+            if (taskCount == 0) {
+                cout << "No tasks.\n";
+            } else {
+                int n;
+                cout << "Enter task number to remove: ";
+                cin >> n;
+                if (n < 1 || n > taskCount) {
+                    cout << "Invalid task number.\n";
+                } else {
+                    for (int i = n - 1; i < taskCount - 1; i++) {
+                        tasks[i] = tasks[i + 1];
+                        completed[i] = completed[i + 1];
+                    }
+                    taskCount--;
+                    cout << "Task removed.\n";
+                }
+            }
+        }
+        else if (choice == 5) {
+            cout << "Goodbye!\n";
+        }
+        else {
+            cout << "Invalid choice.\n";
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
+
 
